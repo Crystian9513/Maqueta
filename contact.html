@@ -3,192 +3,232 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Contacto</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <title>Contacto - SenaEmprende</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página de contacto de SenaEmprende">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
-        rel="stylesheet">
+    <!-- Fuentes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            --verde-sena: #3D8C40;
+            --verde-claro: #E8F5E9;
+            --verde-oscuro: #2E7D32;
+            --gris-claro: #f8f9fa;
+        }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+        }
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+        .bg-sena {
+            background-color: var(--verde-sena) !important;
+        }
+
+        .text-sena {
+            color: var(--verde-sena) !important;
+        }
+
+        .btn-sena {
+            background-color: var(--verde-sena);
+            color: white;
+            border: none;
+        }
+
+        .btn-sena:hover {
+            background-color: var(--verde-oscuro);
+            color: white;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            background-color: var(--verde-sena);
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        /* Estilos para el spinner */
+        #spinner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+
+        #spinner .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            color: var(--verde-sena);
+        }
+
+        /* Estilos para el formulario de contacto */
+        .contact-form {
+            background-color: var(--gris-claro);
+            border-radius: 10px;
+            padding: 2rem;
+        }
+
+        .contact-info-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-item i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--verde-sena);
+        }
+
+        /* Estilos para el mapa */
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos para el footer */
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-right: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--verde-sena);
+        }
+    </style>
+    <style>
+        .page-header {
+            position: relative;
+        }
+
+        .hover-underline:hover {
+            text-decoration: underline !important;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+    </style>
 </head>
 
 <body>
-
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
+    <!-- Spinner -->
+    <div id="spinner">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
     </div>
-    <!-- Spinner End -->
 
-    <!-- Navbar start -->
-    <div class="container-fluid fixed-top">
-        <div class="container topbar bg-primary d-none d-lg-block">
-            <div class="d-flex justify-content-between">
-                <div class="top-info ps-2">
-                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
-                            class="text-white">Sincelejo, Sucre</small>
-                    <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
-                            class="text-white">senaemprende@gmail.com</a></small>
-                </div>
-                <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Política de Privacidad</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Términos de Uso</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Ventas y Reembolsos</small></a>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+
+                <span class="ms-2 fs-4 fw-bold text-sena">RápidoOnline</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="proyectos.html">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contacto</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
+                    <a href="#" class="btn btn-outline-sena me-2" data-bs-toggle="modal"
+                        data-bs-target="#searchModal"><i class="fas fa-search"></i></a>
+                    <a href="cart.html" class="btn btn-outline-sena me-2 position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+                    </a>
+                    <a href="#" class="btn btn-sena"><i class="fas fa-user me-2"></i>Ingresar</a>
                 </div>
             </div>
         </div>
-        <div class="container px-0">
-            <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <img src="img/nuevas/logoSena.png" alt="" class="img-fluid" style="width:80px; height: 80px;">
-                <a href="index.html" class="navbar-brand">
-                    <h1 class="text-primary display-6 m-3">SenaEmprende</h1>
-                </a>
-                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars text-primary"></span>
-                </button>
-                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="" class="nav-item nav-link">Proyectos</a>
-                        <a href="shop.html" class="nav-item nav-link">Tienda</a>
-                        <a href="cart.html" class="nav-item nav-link">Carrito</a>
+    </nav>
 
-                        <a href="contact.html" class="nav-item nav-link">Contactos</a>
-                    </div>
-                    <div class="d-flex m-3 me-0">
-                        <button
-                            class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-                            data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                class="fas fa-search text-primary"></i></button>
-                        <a href="#" class="position-relative me-4 my-auto">
-                            <i class="fa fa-shopping-bag fa-2x"></i>
-                            <span
-                                class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                        </a>
-                        <a href="#" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
-
-        </div>
-    </div>
-    <!-- Navbar End -->
-
-
-    <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal de búsqueda -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
+            <div class="modal-content">
+                <div class="modal-header border-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="Buscar"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Search End -->
-
-
-    <!-- Single Page Header start -->
-    <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Contacto</h1>
-        <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active text-white">Contacto</li>
-        </ol>
-    </div>
-    <!-- Single Page Header End -->
-
-
-    <!-- Contact Start -->
-    <div class="container-fluid contact py-5">
-        <div class="container py-5">
-            <div class="p-5 bg-light rounded">
-                <div class="row g-4">
-                    <div class="col-12">
-                        <div class="text-center mx-auto" style="max-width: 700px;">
-                            <h1 class="text-primary">Contáctanos</h1>
-                            <p class="mb-4">The contact form is currently inactive. Get a functional and working contact
-                                form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code
-                                and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="h-100 rounded">
-                            <div style="width: 100%;">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3768.1598336291395!2d-75.3800967!3d9.3028873!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5915b6f2835f85%3A0x7432bdfe297b75a2!2sSENA%20de%20Boston!5e1!3m2!1ses!2sco!4v1742951534350!5m2!1ses!2sco"
-                                    width="100%" 
-                                    height="450" 
-                                    style="border:0;" 
-                                    allowfullscreen="" 
-                                    loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade">
-                                </iframe>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7">
-                        <form action="" class="">
-                            <input type="text" class="w-100 form-control border-0 py-3 mb-4"
-                                placeholder="Nombre Completo">
-                            <input type="email" class="w-100 form-control border-0 py-3 mb-4" placeholder=" Correo">
-                            <textarea class="w-100 form-control border-0 mb-4" rows="5" cols="10"
-                                placeholder="Mensaje"></textarea>
-                            <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary "
-                                type="submit">Enviar</button>
-                        </form>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="d-flex p-4 rounded mb-4 bg-white">
-                            <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
-                            <div>
-                                <h4>Dirección</h4>
-                                <p class="mb-2">SENA Regional Sucre, Boston Cr 34-45-5</p>
-                            </div>
-                        </div>
-                        <div class="d-flex p-4 rounded mb-4 bg-white">
-                            <i class="fas fa-envelope fa-2x text-primary me-4"></i>
-                            <div>
-                                <h4>Correo</h4>
-                                <p class="mb-2">senaemprende@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="d-flex p-4 rounded bg-white">
-                            <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
-                            <div>
-                                <h4>Telefono</h4>
-                                <p class="mb-2">(+57) 300 774 554</p>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Buscar productos...">
+                                    <button class="btn btn-sena" type="button">Buscar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -196,122 +236,198 @@
             </div>
         </div>
     </div>
-    <!-- Contact End -->
 
-
-    <!-- Pie de Página Inicio -->
-    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-        <div class="container py-5">
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
-                <div class="row g-4">
-                    <div class="col-lg-3">
-                        <a href="#">
-                            <h1 class="text-primary mb-0">SenaEmprende</h1>
-
-                        </a>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email"
-                                placeholder="Tu correo electrónico">
-                            <button type="submit"
-                                class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white"
-                                style="top: 0; right: 0;">Suscríbete ahora</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="d-flex justify-content-end pt-3">
-                            <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+    <!-- Encabezado de página para Contacto -->
+    <div class="page-header position-relative overflow-hidden"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat; height: 300px;">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center text-white">
+                    <h1 class="display-5 fw-bold mb-3">Contacto</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item">
+                                <a href="index.html" class="text-white text-decoration-none hover-underline">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Contacto</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">¿Por qué nos eligen?</h4>
-                        <p class="mb-4">Nuestra trayectoria y compromiso con la calidad nos han convertido en líderes
-                            del sector. Mantenemos los más altos estándares en todos nuestros productos.</p>
-                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Leer más</a>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container py-1">
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="text-center mx-auto" style="max-width: 700px;">
+                    <h1 class="text-sena mb-3">Contáctanos</h1>
+                    <p class="mb-4">¿Tienes alguna pregunta, comentario o sugerencia? Estamos aquí para ayudarte.
+                        Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-12 mb-4">
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3768.1598336291395!2d-75.3800967!3d9.3028873!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5915b6f2835f85%3A0x7432bdfe297b75a2!2sSENA%20de%20Boston!5e1!3m2!1ses!2sco!4v1742951534350!5m2!1ses!2sco"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="col-lg-7">
+                <div class="contact-form">
+                    <form>
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-lg" placeholder="Nombre Completo"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" class="form-control form-control-lg" placeholder="Correo Electrónico"
+                                required>
+                        </div>
+                        <div class="mb-4">
+                            <textarea class="form-control form-control-lg" rows="5" placeholder="Tu Mensaje"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sena btn-lg w-100">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="contact-info-item d-flex">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Dirección</h4>
+                        <p class="mb-0">SENA Regional Sucre, Boston Cr 34-45-5, Sincelejo</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Información</h4>
-                        <a class="btn-link" href="">Nosotros</a>
-                        <a class="btn-link" href="">Contáctanos</a>
-                        <a class="btn-link" href="">Políticas de privacidad</a>
-                        <a class="btn-link" href="">Términos y condiciones</a>
-                        <a class="btn-link" href="">Políticas de devolución</a>
-                        <a class="btn-link" href="">Preguntas frecuentes</a>
+
+                <div class="contact-info-item d-flex">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Correo Electrónico</h4>
+                        <p class="mb-0">RápidoOnline@gmail.com</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Mi cuenta</h4>
-                        <a class="btn-link" href="">Mi cuenta</a>
-                        <a class="btn-link" href="">Detalles de tienda</a>
-                        <a class="btn-link" href="">Carrito de compras</a>
-                        <a class="btn-link" href="">Lista de deseos</a>
-                        <a class="btn-link" href="">Historial de pedidos</a>
-                        <a class="btn-link" href="">Pedidos internacionales</a>
+
+                <div class="contact-info-item d-flex">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>Teléfono</h4>
+                        <p class="mb-0">(+57) 300 774 554</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Contacto</h4>
-                        <p>Dirección: Calle 142 #9-85, Sincelejo</p>
-                        <p>Email: senaemprende@gmail.com</p>
-                        <p>Teléfono: +57 123 456 7890</p>
-                        <p>Métodos de pago</p>
-                        <img src="img/payment.png" class="img-fluid" alt="Medios de pago">
+
+                <div class="contact-info-item d-flex">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Horario de Atención</h4>
+                        <p class="mb-0">Lunes a Viernes: 8:00 AM - 6:00 PM</p>
+                        <p class="mb-0">Sábados: 9:00 AM - 1:00 PM</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Pie de Página Fin -->
 
-    <!-- Copyright Inicio -->
-    <div class="container-fluid copyright bg-dark py-4">
-        <div class="container">
+    <!-- Footer -->
+    <footer class="py-5 text-white">
+        <div class="container ">
+            <div class="row g-4 ">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">RápidoOnline</h5>
+                    <p class="mt-3 text-white">Plataforma de comercio electrónico para microempresas.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 ">
+                    <h5 class="text-white mb-4">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inicio</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Productos</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Categorías</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Microempresas</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">Ayuda</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Preguntas frecuentes</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Envíos</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Devoluciones</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="text-white mb-4">Contacto</h5>
+                    <ul class="list-unstyled text-white">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Sincelejo, Sucre, Colombia</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +57 123 456 7890</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> contacto@RápidoOnline.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="my-4 bg-secondary">
+
             <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Sena</a>, Todos
-                        los derechos reservados.</span>
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-white mb-0">&copy; 2024 RápidoOnline. Todos los derechos reservados.</p>
                 </div>
-                <div class="col-md-6 my-auto text-center text-md-end text-white">
-                    Diseñado Por <a class="border-bottom" href="https://htmlcodex.com">SENA REGIONAL SUCRE</a>
-                </div>
+
             </div>
         </div>
-    </div>
-    <!-- Copyright Fin -->
+    </footer>
+     <!-- Botón WhatsApp Flotante Minimalista -->
+     <a href="https://wa.me/573123456789" target="_blank" style="position: fixed;
+     bottom: 20px;
+     right: 20px;
+     width: 50px;
+     height: 50px;
+     background: #25D366;
+     color: white;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 24px;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+     z-index: 1000;">
+      <i class="fab fa-whatsapp"></i>
+  </a>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-            class="fa fa-arrow-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <!-- Script para el spinner -->
+    <script>
+        // Ocultar spinner cuando la página esté completamente cargada
+        window.addEventListener('load', function () {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.opacity = '0';
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                }, 300); // Tiempo para que termine la animación de fade out
+            }
+        });
+    </script>
 </body>
-
 </html>

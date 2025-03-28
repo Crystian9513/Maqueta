@@ -3,412 +3,518 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Carrito</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <title>Carrito - SenaEmprende</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carrito de compras de SenaEmprende">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
-        rel="stylesheet">
+    <!-- Fuentes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            --verde-sena: #3D8C40;
+            --verde-claro: #E8F5E9;
+            --verde-oscuro: #2E7D32;
+            --gris-claro: #f8f9fa;
+        }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+        }
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+        .bg-sena {
+            background-color: var(--verde-sena) !important;
+        }
+
+        .text-sena {
+            color: var(--verde-sena) !important;
+        }
+
+        .btn-sena {
+            background-color: var(--verde-sena);
+            color: white;
+            border: none;
+        }
+
+        .btn-sena:hover {
+            background-color: var(--verde-oscuro);
+            color: white;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            background-color: var(--verde-sena);
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .cart-item {
+            transition: all 0.3s;
+            border-bottom: 1px solid #eee;
+            padding: 1.5rem 0;
+        }
+
+        .cart-item:hover {
+            background-color: var(--verde-claro);
+        }
+
+        .product-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+        }
+
+        .remove-btn {
+            color: #dc3545;
+            background: none;
+            border: none;
+        }
+
+        .remove-btn:hover {
+            color: #bb2d3b;
+        }
+
+        .summary-card {
+            background-color: var(--gris-claro);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .coupon-input {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 0.75rem 0;
+            outline: none;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+        }
+    </style>
+    <!-- CSS adicional para mejoras -->
+    <style>
+        .page-header {
+            position: relative;
+        }
+
+        .hover-underline:hover {
+            text-decoration: underline !important;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
 
-    <!-- Spinner Start -->
-    <div id="spinner"
-        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
-    </div>
-    <!-- Spinner End -->
+                <span class="ms-2 fs-4 fw-bold text-sena">RápidoOnline</span>
+            </a>
 
-    <!-- Navbar start -->
-    <div class="container-fluid fixed-top">
-        <div class="container topbar bg-primary d-none d-lg-block">
-            <div class="d-flex justify-content-between">
-                <div class="top-info ps-2">
-                    <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
-                            class="text-white">Sincelejo, Sucre</small>
-                    <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
-                            class="text-white">senaemprende@gmail.com</a></small>
-                </div>
-                <div class="top-link pe-2">
-                    <a href="#" class="text-white"><small class="text-white mx-2">Política de Privacidad</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white mx-2">Términos de Uso</small>/</a>
-                    <a href="#" class="text-white"><small class="text-white ms-2">Ventas y Reembolsos</small></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="proyectos.html">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contacto</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
+                    <a href="#" class="btn btn-outline-sena me-2" data-bs-toggle="modal"
+                        data-bs-target="#searchModal"><i class="fas fa-search"></i></a>
+                    <a href="cart.html" class="btn btn-outline-sena me-2 position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+                    </a>
+                    <a href="#" class="btn btn-sena"><i class="fas fa-user me-2"></i>Ingresar</a>
                 </div>
             </div>
         </div>
-        <div class="container px-0">
-            <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                <img src="img/nuevas/logoSena.png" alt="" class="img-fluid" style="width:80px; height: 80px;">
-                <a href="index.html" class="navbar-brand">
-                    <h1 class="text-primary display-6 m-3">SenaEmprende</h1>
-                </a>
-                <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars text-primary"></span>
-                </button>
-                <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                    <div class="navbar-nav mx-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="proyectos.html" class="nav-item nav-link">Proyectos</a>
-                        <a href="shop.html" class="nav-item nav-link">Tienda</a>
-                        <a href="cart.html" class="nav-item nav-link">Carrito</a>
-                        
-                        <a href="contact.html" class="nav-item nav-link">Contactos</a>
-                    </div>
-                    <div class="d-flex m-3 me-0">
-                        <button
-                            class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-                            data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                class="fas fa-search text-primary"></i></button>
-                        <a href="#" class="position-relative me-4 my-auto">
-                            <i class="fa fa-shopping-bag fa-2x"></i>
-                            <span
-                                class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                        </a>
-                        <a href="#" class="my-auto">
-                            <i class="fas fa-user fa-2x"></i>
-                        </a>
-                    </div>
-                </div>
-            </nav>
+    </nav>
 
-        </div>
-    </div>
-    <!-- Navbar End -->
-
-    <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal de búsqueda -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
+            <div class="modal-content">
+                <div class="modal-header border-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="Buscar"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Search End -->
-
-    <!-- Single Page Header start -->
-    <div class="container-fluid page-header py-5">
-        <h1 class="text-center text-white display-6">Carrito</h1>
-        <ol class="breadcrumb justify-content-center mb-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active text-white">Carrito</li>
-        </ol>
-    </div>
-    <!-- Single Page Header End -->
-
-    <!-- Cart Page Start -->
-    <div class="container-fluid py-5">
-        <div class="container py-5">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Productos</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Cantidad</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <div class="d-flex align-items-center">
-                                    <img src="img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle"
-                                        style="width: 80px; height: 80px;" alt="">
-                                </div>
-                            </th>
-                            <td>
-                                <p class="mb-0 mt-4">Banana</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4">5.000 $</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4">5.000 $</p>
-                            </td>
-                            <td>
-                                <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="d-flex align-items-center">
-                                    <img src="img/vegetable-item-5.jpg" class="img-fluid me-5 rounded-circle"
-                                        style="width: 80px; height: 80px;" alt="" alt="">
-                                </div>
-                            </th>
-                            <td>
-                                <p class="mb-0 mt-4">Papas</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4">4.000 $</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4">4.000 $</p>
-                            </td>
-                            <td>
-                                <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="d-flex align-items-center">
-                                    <img src="img/vegetable-item-2.jpg" class="img-fluid me-5 rounded-circle"
-                                        style="width: 80px; height: 80px;" alt="" alt="">
-                                </div>
-                            </th>
-                            <td>
-                                <p class="mb-0 mt-4">Brocoli</p>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4">6.000 $</p>
-                            </td>
-                            <td>
-                                <div class="input-group quantity mt-4" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm text-center border-0"
-                                        value="1">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="mb-0 mt-4">6.000 $</p>
-                            </td>
-                            <td>
-                                <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                    <i class="fa fa-times text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="mt-5">
-                <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Codigo de cupón">
-                <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Aplicar
-                    cupón</button>
-            </div>
-            <div class="row g-4 justify-content-end">
-                <div class="col-8"></div>
-                <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
-                    <div class="bg-light rounded">
-                        <div class="p-4">
-                            <h1 class="display-6 mb-4">Carrito <span class="fw-normal">Total</span></h1>
-                            <div class="d-flex justify-content-between mb-4">
-                                <h5 class="mb-0 me-4">Subtotal:</h5>
-                                <p class="mb-0">$96.00</p>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h5 class="mb-0 me-4">Envío</h5>
-                                <div class="">
-                                    <p class="mb-0">$10.000</p>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Buscar productos...">
+                                    <button class="btn btn-sena" type="button">Buscar</button>
                                 </div>
                             </div>
-
                         </div>
-                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                            <h5 class="mb-0 ps-4 me-4">Total</h5>
-                            <p class="mb-0 pe-4">$99.00</p>
-                        </div>
-                        <button
-                            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                            type="button">Pagar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Cart Page End -->
-
-    <!-- Pie de Página Inicio -->
-    <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-        <div class="container py-5">
-            <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
-                <div class="row g-4">
-                    <div class="col-lg-3">
-                        <a href="#">
-                            <h1 class="text-primary mb-0">SenaEmprende</h1>
-
-                        </a>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="position-relative mx-auto">
-                            <input class="form-control border-0 w-100 py-3 px-4 rounded-pill" type="email"
-                                placeholder="Tu correo electrónico">
-                            <button type="submit"
-                                class="btn btn-primary border-0 border-secondary py-3 px-4 position-absolute rounded-pill text-white"
-                                style="top: 0; right: 0;">Suscríbete ahora</button>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="d-flex justify-content-end pt-3">
-                            <a class="btn  btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-secondary me-2 btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-youtube"></i></a>
-                            <a class="btn btn-outline-secondary btn-md-square rounded-circle" href=""><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
+    <!-- Encabezado de página para Carrito -->
+    <div class="page-header position-relative overflow-hidden"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat; height: 300px;">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center text-white">
+                    <h1 class="display-5 fw-bold mb-3">Tu Carrito</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item">
+                                <a href="index.html" class="text-white text-decoration-none hover-underline">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Carrito</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">¿Por qué nos eligen?</h4>
-                        <p class="mb-4">Nuestra trayectoria y compromiso con la calidad nos han convertido en líderes
-                            del sector. Mantenemos los más altos estándares en todos nuestros productos.</p>
-                        <a href="" class="btn border-secondary py-2 px-4 rounded-pill text-primary">Leer más</a>
-                    </div>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Lista de productos -->
+            <div class="col-lg-8">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Total</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Producto 1 -->
+                            <tr class="cart-item">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                            class="product-img me-4" alt="Banana">
+                                        <div>
+                                            <h6 class="mb-0">Banana</h6>
+                                            <small class="text-muted">Fruta fresca</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0">5.000 COP</p>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="quantity-btn btn-minus">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="text" class="quantity-input" value="1">
+                                        <button class="quantity-btn btn-plus">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-bold">5.000 COP</p>
+                                </td>
+                                <td>
+                                    <button class="remove-btn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!-- Producto 2 -->
+                            <tr class="cart-item">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                            class="product-img me-4" alt="Papas">
+                                        <div>
+                                            <h6 class="mb-0">Papas</h6>
+                                            <small class="text-muted">Frescas y orgánicas</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0">4.000 COP</p>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="quantity-btn btn-minus">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="text" class="quantity-input" value="1">
+                                        <button class="quantity-btn btn-plus">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-bold">4.000 COP</p>
+                                </td>
+                                <td>
+                                    <button class="remove-btn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!-- Producto 3 -->
+                            <tr class="cart-item">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://images.unsplash.com/photo-1584270354949-c26b0d5b4a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                            class="product-img me-4" alt="Brócoli">
+                                        <div>
+                                            <h6 class="mb-0">Brócoli</h6>
+                                            <small class="text-muted">Fresco y orgánico</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0">6.000 COP</p>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <button class="quantity-btn btn-minus">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="text" class="quantity-input" value="1">
+                                        <button class="quantity-btn btn-plus">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0 fw-bold">6.000 COP</p>
+                                </td>
+                                <td>
+                                    <button class="remove-btn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Información</h4>
-                        <a class="btn-link" href="">Nosotros</a>
-                        <a class="btn-link" href="">Contáctanos</a>
-                        <a class="btn-link" href="">Políticas de privacidad</a>
-                        <a class="btn-link" href="">Términos y condiciones</a>
-                        <a class="btn-link" href="">Políticas de devolución</a>
-                        <a class="btn-link" href="">Preguntas frecuentes</a>
-                    </div>
+
+                <!-- Cupón de descuento -->
+                <div class="d-flex align-items-center mb-5">
+                    <input type="text" class="coupon-input flex-grow-1 me-3" placeholder="Código de cupón">
+                    <button class="btn btn-outline-sena">Aplicar cupón</button>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="d-flex flex-column text-start footer-item">
-                        <h4 class="text-light mb-3">Mi cuenta</h4>
-                        <a class="btn-link" href="">Mi cuenta</a>
-                        <a class="btn-link" href="">Detalles de tienda</a>
-                        <a class="btn-link" href="">Carrito de compras</a>
-                        <a class="btn-link" href="">Lista de deseos</a>
-                        <a class="btn-link" href="">Historial de pedidos</a>
-                        <a class="btn-link" href="">Pedidos internacionales</a>
+            </div>
+
+            <!-- Resumen del pedido -->
+            <div class="col-lg-4">
+                <div class="summary-card">
+                    <h4 class="mb-4">Resumen del pedido</h4>
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Subtotal:</span>
+                        <span class="fw-bold">15.000 COP</span>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-item">
-                        <h4 class="text-light mb-3">Contacto</h4>
-                        <p>Dirección: Calle 142 #9-85, Sincelejo</p>
-                        <p>Email: senaemprende@gmail.com</p>
-                        <p>Teléfono: +57 123 456 7890</p>
-                        <p>Métodos de pago</p>
-                        <img src="img/payment.png" class="img-fluid" alt="Medios de pago">
+
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Envío:</span>
+                        <span class="fw-bold">5.000 COP</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between py-3 border-top border-bottom mb-4">
+                        <span class="fw-bold">Total:</span>
+                        <span class="fw-bold">20.000 COP</span>
+                    </div>
+
+                    <button class="btn btn-sena w-100 py-3">Proceder al pago</button>
+
+                    <div class="text-center mt-3">
+                        <a href="shop.html" class="text-sena">← Continuar comprando</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Pie de Página Fin -->
 
-    <!-- Copyright Inicio -->
-    <div class="container-fluid copyright bg-dark py-4">
-        <div class="container">
+    <!-- Footer -->
+    <footer class="py-5 text-white">
+        <div class="container ">
+            <div class="row g-4 ">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4">RápidoOnline</h5>
+                    <p class="mt-3 text-white">Plataforma de comercio electrónico para microempresas.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 ">
+                    <h5 class="text-white mb-4">Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inicio</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Productos</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Categorías</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Microempresas</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">Ayuda</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Preguntas frecuentes</a>
+                        </li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Envíos</a></li>
+                        <li class="mb-2"><a href="#" class="text-white text-decoration-none">Devoluciones</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                    <h5 class="text-white mb-4">Contacto</h5>
+                    <ul class="list-unstyled text-white">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Sincelejo, Sucre, Colombia</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +57 123 456 7890</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> contacto@RápidoOnline.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="my-4 bg-secondary">
+
             <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <span class="text-light"><a href="#"><i class="fas fa-copyright text-light me-2"></i>Sena</a>, Todos
-                        los derechos reservados.</span>
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-white mb-0">&copy; 2024 RápidoOnline. Todos los derechos reservados.</p>
                 </div>
-                <div class="col-md-6 my-auto text-center text-md-end text-white">
-                    Diseñado Por <a class="border-bottom" href="https://htmlcodex.com">SENA REGIONAL SUCRE</a>
-                </div>
+
             </div>
         </div>
-    </div>
-    <!-- Copyright Fin -->
+    </footer>
+    <!-- Botón WhatsApp Flotante Minimalista -->
+    <a href="https://wa.me/573123456789" target="_blank" style="position: fixed;
+ bottom: 20px;
+ right: 20px;
+ width: 50px;
+ height: 50px;
+ background: #25D366;
+ color: white;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 24px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+ z-index: 1000;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-            class="fa fa-arrow-up"></i></a>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Script para el carrito -->
+    <script>
+        // Funcionalidad para aumentar/disminuir cantidad
+        document.querySelectorAll('.btn-plus').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.parentNode.querySelector('.quantity-input');
+                input.value = parseInt(input.value) + 1;
+                updateCart();
+            });
+        });
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+        document.querySelectorAll('.btn-minus').forEach(button => {
+            button.addEventListener('click', function () {
+                const input = this.parentNode.querySelector('.quantity-input');
+                if (parseInt(input.value) > 1) {
+                    input.value = parseInt(input.value) - 1;
+                    updateCart();
+                }
+            });
+        });
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+        // Funcionalidad para eliminar productos
+        document.querySelectorAll('.remove-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                this.closest('.cart-item').remove();
+                updateCart();
+            });
+        });
+
+        // Función para actualizar el carrito (simulada)
+        function updateCart() {
+            console.log("Carrito actualizado");
+            // Aquí iría la lógica para actualizar los totales
+        }
+    </script>
 </body>
 
 </html>

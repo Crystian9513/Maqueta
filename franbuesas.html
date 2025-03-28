@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Detalle de Producto - SenaEmprende</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda de productos de emprendedores SENA">
+
+    <!-- Fuentes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            --verde-sena: #3D8C40;
+            --verde-claro: #E8F5E9;
+            --verde-oscuro: #2E7D32;
+            --gris-claro: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+        }
+
+        .bg-sena {
+            background-color: var(--verde-sena) !important;
+        }
+
+        .text-sena {
+            color: var(--verde-sena) !important;
+        }
+
+        .btn-sena {
+            background-color: var(--verde-sena);
+            color: white;
+            border: none;
+        }
+
+        .btn-sena:hover {
+            background-color: var(--verde-oscuro);
+            color: white;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-header {
+            background-color: var(--verde-sena);
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            transition: all 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--verde-sena);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .sidebar {
+            background-color: var(--gris-claro);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .price-slider {
+            width: 100%;
+        }
+
+        .price-output {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .pagination .page-link {
+            color: var(--verde-sena);
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--verde-sena);
+            border-color: var(--verde-sena);
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        /* Estilos específicos para la página de detalle */
+        .product-detail-img {
+            max-height: 500px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .quantity-input {
+            width: 100px;
+        }
+
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--verde-sena);
+            border-bottom: 2px solid var(--verde-sena);
+        }
+
+        .nav-tabs .nav-link {
+            color: #495057;
+            border: none;
+        }
+
+        .review-item {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .related-products .card {
+            border-color: var(--verde-sena);
+        }
+
+        .related-products .card-badge {
+            background-color: var(--verde-sena);
+        }
+    </style>
+    <style>
+        /* Variables de color */
+        :root {
+            --verde-sena: #3D8C40;
+            --verde-claro: #E8F5E9;
+            --verde-oscuro: #2E7D32;
+        }
+
+        /* Efecto hover para tarjetas de producto */
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+
+        .hover-effect:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Estilos para el botón de añadir al carrito */
+        .card-actions {
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .product-card:hover .card-actions {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Estilos para la sección "Cómo funciona" */
+        .how-it-works-card {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .how-it-works-card:hover {
+            background-color: var(--verde-claro);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Onda decorativa */
+        .wave-divider-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .wave-divider-top svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner -->
+    <div id="spinner"
+        class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="color: var(--verde-sena) !important;"></div>
+    </div>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+
+                <span class="ms-2 fs-4 fw-bold text-sena">RápidoOnline</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="proyectos.html">¿Quienes Somos?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Tienda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Carrito</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contacto</a>
+                    </li>
+                </ul>
+
+                <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
+                    <a href="#" class="btn btn-outline-sena me-2" data-bs-toggle="modal"
+                        data-bs-target="#searchModal"><i class="fas fa-search"></i></a>
+                    <a href="cart.html" class="btn btn-outline-sena me-2 position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+                    </a>
+                    <a href="#" class="btn btn-sena"><i class="fas fa-user me-2"></i>Ingresar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal de búsqueda -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Buscar productos...">
+                                    <button class="btn btn-sena" type="button">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Encabezado de página con imagen de frambuesas -->
+    <div class="page-header"
+        style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/fruite-item-5.jpg') no-repeat center center; background-size: cover; height: 300px;">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center text-white">
+                    <h1 class="display-5 fw-bold">Frambuesas Frescas</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html" class="text-white">Inicio</a></li>
+                            <li class="breadcrumb-item"><a href="shop.html" class="text-white">Tienda</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Frambuesas</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .page-header {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0.75rem 1rem;
+            border-radius: 0.25rem;
+        }
+
+        .breadcrumb-item a:hover {
+            color: #f8f9fa !important;
+            text-decoration: underline;
+        }
+
+        .breadcrumb-item.active {
+            color: #e9ecef;
+        }
+
+        .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.7);
+            content: ">";
+        }
+    </style>
+
+    <!-- Contenido principal -->
+    <div class="container-fluid ">
+        <div class="container py-5">
+            <div class="row g-4 mb-5">
+                <div class="col-lg-8 col-xl-9">
+                    <div class="row g-4">
+                        <!-- Sección de Imagen -->
+                        <div class="col-lg-6">
+                            <div class="border rounded">
+                                <a href="#">
+                                    <img src="img/fruite-item-2.jpg" class="img-fluid rounded" alt="Frambuesas frescas">
+                                </a>
+                            </div>
+                            <!-- Miniaturas adicionales (opcional) -->
+                            <div class="row mt-3 g-2">
+                                <div class="col-3">
+                                    <img src="img/fruite-item-2.jpg" class="img-thumbnail cursor-pointer"
+                                        alt="Frambuesas vista 1">
+                                </div>
+                                <div class="col-3">
+                                    <img src="img/fruite-item-2.jpg" class="img-thumbnail cursor-pointer"
+                                        alt="Frambuesas vista 2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sección de Información -->
+                        <div class="col-lg-6">
+                            <h4 class="fw-bold mb-3">Frambuesas Frescas</h4>
+                            <p class="mb-3">Categoría: Frutas</p>
+                            <h5 class="fw-bold mb-3 text-sena">25.500 COP/kg</h5>
+
+                            <div class="d-flex mb-4">
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star text-warning"></i>
+                                <i class="fa fa-star-half-alt text-warning"></i>
+                                <span class="ms-2">(28 reseñas)</span>
+                            </div>
+
+                            <p class="mb-4">Frambuesas orgánicas cultivadas localmente en condiciones controladas,
+                                recolectadas en su punto óptimo de maduración para garantizar el mejor sabor y textura.
+                            </p>
+
+                            <div class="alert alert-success mb-4">
+                                <i class="fas fa-leaf me-2"></i> Producto 100% orgánico certificado
+                            </div>
+
+                            <!-- Selector de Cantidad -->
+                            <div class="mb-4">
+                                <label class="form-label">Cantidad (kg)</label>
+                                <div class="input-group quantity quantity-input" style="width: 150px;">
+                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border quantity-btn">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input type="text" class="form-control form-control-sm text-center border-0"
+                                        value="1">
+                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border quantity-btn">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Botones de Acción -->
+                            <div class="d-flex flex-wrap gap-3 mb-4">
+                                <a href="#" class="btn btn-sena rounded-pill px-4 py-2 flex-grow-1">
+                                    <i class="fa fa-shopping-bag me-2"></i> Añadir al carrito
+                                </a>
+                                <a href="#" class="btn btn-outline-sena rounded-pill px-4 py-2">
+                                    <i class="far fa-heart me-2"></i> Guardar
+                                </a>
+                            </div>
+
+                            <!-- Disponibilidad -->
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="fas fa-check-circle text-sena me-2"></i>
+                                <small class="text-muted">Disponible en stock (25 kg)</small>
+                            </div>
+
+                            <!-- Compartir -->
+                            <div class="d-flex align-items-center">
+                                <span class="me-2">Compartir:</span>
+                                <a href="#" class="text-decoration-none me-3"><i
+                                        class="fab fa-facebook-f text-primary"></i></a>
+                                <a href="#" class="text-decoration-none me-3"><i
+                                        class="fab fa-twitter text-info"></i></a>
+                                <a href="#" class="text-decoration-none me-3"><i
+                                        class="fab fa-instagram text-danger"></i></a>
+                                <a href="#" class="text-decoration-none"><i
+                                        class="fab fa-whatsapp text-success"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Pestañas de Información -->
+                        <div class="col-lg-12">
+                            <nav>
+                                <div class="nav nav-tabs mb-3">
+                                    <button class="nav-link active" type="button" id="nav-desc-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-desc" aria-controls="nav-desc"
+                                        aria-selected="true">Descripción</button>
+                                    <button class="nav-link" type="button" id="nav-info-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-info" aria-controls="nav-info"
+                                        aria-selected="false">Información Nutricional</button>
+                                    <button class="nav-link" type="button" id="nav-reviews-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-reviews" aria-controls="nav-reviews"
+                                        aria-selected="false">Reseñas</button>
+                                </div>
+                            </nav>
+
+                            <div class="tab-content mb-5">
+                                <!-- Descripción -->
+                                <div class="tab-pane fade show active" id="nav-desc" role="tabpanel"
+                                    aria-labelledby="nav-desc-tab">
+                                    <p>Nuestras frambuesas son cultivadas en la región de Antioquia bajo estrictos
+                                        controles de calidad. Cada fruto es seleccionado manualmente para garantizar que
+                                        llegue a tus manos en perfecto estado.</p>
+                                    <p>Características principales:</p>
+                                    <ul>
+                                        <li>Cultivadas sin pesticidas ni químicos dañinos</li>
+                                        <li>Recolectadas el mismo día del envío</li>
+                                        <li>Empacadas en cajas especiales para proteger los frutos</li>
+                                        <li>Vida útil de 5-7 días en refrigeración</li>
+                                    </ul>
+
+                                    <div class="px-2 mt-4">
+                                        <div class="row g-4">
+                                            <div class="col-6">
+                                                <div
+                                                    class="row bg-light align-items-center text-center justify-content-center py-2">
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Origen</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Antioquia, Colombia</p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="row text-center align-items-center justify-content-center py-2">
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Temporada</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Todo el año</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div
+                                                    class="row text-center align-items-center justify-content-center py-2">
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Variedad</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Heritage</p>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="row bg-light text-center align-items-center justify-content-center py-2">
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Conservación</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="mb-0">Refrigerar (0-4°C)</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Información Nutricional -->
+                                <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Información Nutricional</th>
+                                                    <th>Por 100g</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Calorías</td>
+                                                    <td>52 kcal</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carbohidratos</td>
+                                                    <td>11.9 g</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fibra</td>
+                                                    <td>6.5 g</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Azúcares</td>
+                                                    <td>4.4 g</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Proteínas</td>
+                                                    <td>1.2 g</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vitamina C</td>
+                                                    <td>44% VD</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Manganeso</td>
+                                                    <td>36% VD</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="mt-3">*VD = Valores Diarios basados en una dieta de 2000 calorías</p>
+                                </div>
+
+                                <!-- Reseñas -->
+                                <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
+                                    aria-labelledby="nav-reviews-tab">
+                                    <div class="review-item mb-4">
+                                        <div class="d-flex">
+                                            <img src="https://randomuser.me/api/portraits/women/65.jpg"
+                                                class="img-fluid rounded-circle p-3" style="width: 80px; height: 80px;"
+                                                alt="">
+                                            <div class="ms-3">
+                                                <p class="mb-2 small">10 de junio, 2023</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>Laura Martínez</h5>
+                                                    <div class="d-flex mb-3">
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                    </div>
+                                                </div>
+                                                <p>Las frambuesas llegaron en perfecto estado, dulces y jugosas como
+                                                    nunca había probado. El empaque es ecológico y muy bien pensado para
+                                                    proteger la fruta. ¡Volveré a comprar!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="review-item">
+                                        <div class="d-flex">
+                                            <img src="https://randomuser.me/api/portraits/men/75.jpg"
+                                                class="img-fluid rounded-circle p-3" style="width: 80px; height: 80px;"
+                                                alt="">
+                                            <div class="ms-3">
+                                                <p class="mb-2 small">28 de mayo, 2023</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <h5>Andrés Gómez</h5>
+                                                    <div class="d-flex mb-3">
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="fa fa-star text-warning"></i>
+                                                        <i class="far fa-star text-warning"></i>
+                                                    </div>
+                                                </div>
+                                                <p>Muy buena calidad, aunque algunas venían un poco aplastadas. El sabor
+                                                    es excelente, perfectas para hacer mermelada casera. Recomiendo
+                                                    pedir un poco más de lo que necesitan porque es difícil dejar de
+                                                    comerlas.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Formulario de Reseña -->
+                                    <form action="#" class="mt-5">
+                                        <h4 class="mb-4 fw-bold">Deja tu reseña</h4>
+                                        <div class="row g-4">
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" placeholder="Tu nombre *"
+                                                    required>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <input type="email" class="form-control" placeholder="Tu email *"
+                                                    required>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <textarea class="form-control mt-4" rows="5" placeholder="Tu reseña *"
+                                                    required spellcheck="false"></textarea>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="d-flex justify-content-between py-3 mb-5">
+                                                    <div class="d-flex align-items-center">
+                                                        <p class="mb-0 me-3">Calificación:</p>
+                                                        <div class="star-rating">
+                                                            <i class="far fa-star text-warning cursor-pointer"
+                                                                data-rating="1"></i>
+                                                            <i class="far fa-star text-warning cursor-pointer"
+                                                                data-rating="2"></i>
+                                                            <i class="far fa-star text-warning cursor-pointer"
+                                                                data-rating="3"></i>
+                                                            <i class="far fa-star text-warning cursor-pointer"
+                                                                data-rating="4"></i>
+                                                            <i class="far fa-star text-warning cursor-pointer"
+                                                                data-rating="5"></i>
+                                                            <input type="hidden" id="rating-value" value="0">
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit"
+                                                        class="btn btn-sena rounded-pill px-4">Publicar reseña</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4 col-xl-3">
+                    <div class="sidebar">
+                        <div class="mb-4">
+                            <div class="input-group w-100">
+                                <input type="search" class="form-control" placeholder="Buscar productos...">
+                                <button class="btn btn-sena"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Categorías</h4>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="#" class="text-decoration-none"><i
+                                                class="fas fa-apple-alt me-2 text-sena"></i>Frutas</a>
+                                        <span>(3)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="#" class="text-decoration-none"><i
+                                                class="fas fa-bread-slice me-2 text-sena"></i>Panes</a>
+                                        <span>(5)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="#" class="text-decoration-none"><i
+                                                class="fas fa-tshirt me-2 text-sena"></i>Artesanías</a>
+                                        <span>(8)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="#" class="text-decoration-none"><i
+                                                class="fas fa-wine-bottle me-2 text-sena"></i>Bebidas</a>
+                                        <span>(4)</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="d-flex justify-content-between py-2">
+                                        <a href="#" class="text-decoration-none"><i
+                                                class="fas fa-home me-2 text-sena"></i>Hogar</a>
+                                        <span>(6)</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-4">
+                            <h4>Productos destacados</h4>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded me-3" style="width: 80px; height: 80px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;" alt="">
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Uvas frescas</h6>
+                                    <div class="d-flex mb-1">
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star small"></i>
+                                    </div>
+                                    <div class="d-flex">
+                                        <h6 class="fw-bold me-2 text-sena small">18.900 COP</h6>
+                                        <h6 class="text-danger text-decoration-line-through small">25.000 COP</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded me-3" style="width: 80px; height: 80px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;" alt="">
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Pan artesanal</h6>
+                                    <div class="d-flex mb-1">
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star-half-alt text-warning small"></i>
+                                    </div>
+                                    <div class="d-flex">
+                                        <h6 class="fw-bold me-2 text-sena small">8.000 COP</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="rounded me-3" style="width: 80px; height: 80px; overflow: hidden;">
+                                    <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                        class="img-fluid w-100 h-100" style="object-fit: cover;" alt="">
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Sombrero vueltiao</h6>
+                                    <div class="d-flex mb-1">
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                        <i class="fa fa-star text-warning small"></i>
+                                    </div>
+                                    <div class="d-flex">
+                                        <h6 class="fw-bold me-2 text-sena small">85.000 COP</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="#" class="btn btn-outline-sena w-100">Ver más</a>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="position-relative rounded overflow-hidden">
+                                <img src="img/nuevas/ar1.webp" class="img-fluid w-100"
+                                    style="height: 200px; object-fit: cover;" alt="">
+                                <div class="position-absolute top-50 start-0 translate-middle-y ps-4">
+                                    <h4 class="text-white">Artesanías<br>Colombianas</h4>
+                                    <a href="#" class="btn btn-sena btn-sm">Comprar ahora</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="fw-bold mb-4">Productos relacionados</h1>
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="card product-card h-100 border-0 shadow-sm overflow-hidden transition-all hover-effect">
+                        <div class="position-relative">
+                            <img src="img/nuevas/ar2.jpg" class="card-img-top" alt="Mochila Wayú"
+                                style="height: 250px; object-fit: cover;">
+                            <div class="badge bg-danger position-absolute top-0 end-0 m-3">-20%</div>
+                            <div class="card-actions position-absolute bottom-0 start-0 w-100 p-3">
+                                <button class="btn btn-sena btn-lg w-100">
+                                    <i class="fas fa-cart-plus me-2"></i> Añadir al carrito
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-verde-claro text-sena">Artesanías</span>
+                                <div class="star-rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <span class="text-muted ms-1">4.8 (24)</span>
+                                </div>
+                            </div>
+                            <h5 class="card-title mb-1">Mochila Wayú</h5>
+                            <p class="card-text text-muted small mb-3">Hecha a mano por artesanos indígenas de La
+                                Guajira</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="text-decoration-line-through text-muted me-2">$120.000</span>
+                                    <span class="h5 text-sena fw-bold">$96.000</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-sena rounded-circle">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 2 -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="card product-card h-100 border-0 shadow-sm overflow-hidden transition-all hover-effect">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                class="card-img-top" alt="Mermelada de mango" style="height: 250px; object-fit: cover;">
+                            <div class="card-actions position-absolute bottom-0 start-0 w-100 p-3">
+                                <button class="btn btn-sena btn-lg w-100">
+                                    <i class="fas fa-cart-plus me-2"></i> Añadir al carrito
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-verde-claro text-sena">Alimentos</span>
+                                <div class="star-rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <span class="text-muted ms-1">4.5 (18)</span>
+                                </div>
+                            </div>
+                            <h5 class="card-title mb-1">Mermelada de mango</h5>
+                            <p class="card-text text-muted small mb-3">Elaborada con frutas 100% naturales sin
+                                conservantes</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 text-sena fw-bold">$18.000</span>
+                                <button class="btn btn-sm btn-outline-sena rounded-circle">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 3 -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="card product-card h-100 border-0 shadow-sm overflow-hidden transition-all hover-effect">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                class="card-img-top" alt="Cargador solar" style="height: 250px; object-fit: cover;">
+                            <div class="badge bg-success position-absolute top-0 end-0 m-3">Nuevo</div>
+                            <div class="card-actions position-absolute bottom-0 start-0 w-100 p-3">
+                                <button class="btn btn-sena btn-lg w-100">
+                                    <i class="fas fa-cart-plus me-2"></i> Añadir al carrito
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-verde-claro text-sena">Tecnología</span>
+                                <div class="star-rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <span class="text-muted ms-1">4.9 (32)</span>
+                                </div>
+                            </div>
+                            <h5 class="card-title mb-1">Cargador solar portátil</h5>
+                            <p class="card-text text-muted small mb-3">Energía renovable para todos tus dispositivos</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 text-sena fw-bold">$85.000</span>
+                                <button class="btn btn-sm btn-outline-sena rounded-circle">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 -->
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="card product-card h-100 border-0 shadow-sm overflow-hidden transition-all hover-effect">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+                                class="card-img-top" alt="Bufanda de lana" style="height: 250px; object-fit: cover;">
+                            <div class="card-actions position-absolute bottom-0 start-0 w-100 p-3">
+                                <button class="btn btn-sena btn-lg w-100">
+                                    <i class="fas fa-cart-plus me-2"></i> Añadir al carrito
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-verde-claro text-sena">Textiles</span>
+                                <div class="star-rating">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <span class="text-muted ms-1">4.7 (15)</span>
+                                </div>
+                            </div>
+                            <h5 class="card-title mb-1">Bufanda de lana</h5>
+                            <p class="card-text text-muted small mb-3">Hecha a mano con lana 100% natural y tintes
+                                ecológicos</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="h5 text-sena fw-bold">$45.000</span>
+                                <button class="btn btn-sm btn-outline-sena rounded-circle">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="py-5 text-white">
+            <div class="container ">
+                <div class="row g-4 ">
+                    <div class="col-lg-4">
+                        <h5 class="text-white mb-4">RápidoOnline</h5>
+                        <p class="mt-3 text-white">Plataforma de comercio electrónico para microempresas.</p>
+                        <div class="d-flex mt-4">
+                            <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="#" class="btn btn-outline-light btn-sm me-2 rounded-circle"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 ">
+                        <h5 class="text-white mb-4">Enlaces</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Inicio</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Productos</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Categorías</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Microempresas</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Contacto</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4">
+                        <h5 class="text-white mb-4">Ayuda</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Preguntas
+                                    frecuentes</a>
+                            </li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Envíos</a></li>
+                            <li class="mb-2"><a href="#" class="text-white text-decoration-none">Devoluciones</a></li>
+                            <li><a href="#" class="text-white text-decoration-none">Términos y condiciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4">
+                        <h5 class="text-white mb-4">Contacto</h5>
+                        <ul class="list-unstyled text-white">
+                            <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Sincelejo, Sucre, Colombia</li>
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i> +57 123 456 7890</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i> contacto@RápidoOnline.com</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="my-4 bg-secondary">
+
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="small text-white mb-0">&copy; 2024 RápidoOnline. Todos los derechos reservados.</p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+ <!-- Botón WhatsApp Flotante Minimalista -->
+ <a href="https://wa.me/573123456789" target="_blank" style="position: fixed;
+ bottom: 20px;
+ right: 20px;
+ width: 50px;
+ height: 50px;
+ background: #25D366;
+ color: white;
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 24px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+ z-index: 1000;">
+  <i class="fab fa-whatsapp"></i>
+</a>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            // Ocultar spinner cuando la página esté completamente cargada
+            window.addEventListener('load', function () {
+                const spinner = document.getElementById('spinner');
+                if (spinner) {
+                    spinner.style.opacity = '0';
+                    setTimeout(() => {
+                        spinner.style.display = 'none';
+                    }, 500); // Tiempo para que termine la animación de fade out
+                }
+            });
+
+            // Cantidad de productos
+            document.querySelector('.btn-minus')?.addEventListener('click', function () {
+                const input = document.querySelector('.quantity-input input');
+                if (input) {
+                    let value = parseInt(input.value) || 1;
+                    if (value > 1) {
+                        input.value = value - 1;
+                    }
+                }
+            });
+
+            document.querySelector('.btn-plus')?.addEventListener('click', function () {
+                const input = document.querySelector('.quantity-input input');
+                if (input) {
+                    let value = parseInt(input.value) || 1;
+                    input.value = value + 1;
+                }
+            });
+
+            // Calificación con estrellas
+            const stars = document.querySelectorAll('.fa-star.text-warning.cursor-pointer');
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    stars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.add('text-warning');
+                        } else {
+                            s.classList.remove('text-warning');
+                        }
+                    });
+                });
+            });
+        </script>
+</body>
+
+</html>
