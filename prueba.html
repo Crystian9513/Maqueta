@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+   
+</head>
+<body>
+        <p>1 <span id="1"></span></p>
+        <p>2 <span id="2"></span></p>
+      
+    <script>
+      
+        async function getPokemonData() {
+            
+                const res = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu");
+                const dato = await res.json();
+
+                const abilities = dato.abilities;
+                document.getElementById("1").textContent = abilities[0].ability.name;
+                document.getElementById("2").textContent = abilities[1].ability.name;
+
+            
+        }
+        getPokemonData();
+    </script>
+
+</body>
+</html>
